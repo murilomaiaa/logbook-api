@@ -9,8 +9,8 @@ export class Server {
   }
 
   public setupRoutes() {
-    this.app.get('/', (request, response) => { 
-      return response.json({status: true}).status(200)
+    this.app.get('/', (request, response) => {
+      return response.json({ status: true }).status(200)
     })
   }
 }
