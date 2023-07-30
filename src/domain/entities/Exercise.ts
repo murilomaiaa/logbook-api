@@ -1,7 +1,7 @@
 import { Entity } from './Entity'
 import { ExerciseSet } from './ExerciseSet'
 
-type ExerciseProps = {
+export type ExerciseProps = {
   name: string
   sets: ExerciseSet[]
 }

@@ -2,5 +2,5 @@ import { CreateExerciseService } from '@/application/services/Exercise/CreateExe
 import { MongoExerciseRepository } from '@/infra/mongodb/repositories/MongoExerciseRepository'
 
 export function makeCreateExerciseService() {
-  return new CreateExerciseService(new MongoExerciseRepository())
+  return new CreateExerciseService(MongoExerciseRepository.getInstance())
 }

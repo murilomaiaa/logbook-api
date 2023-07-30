@@ -1,5 +1,4 @@
 # Crud série
-
 Um usuário poderá adicionar uma série de um determinado exercício
 Uma série é composta por
 

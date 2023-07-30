@@ -4,7 +4,8 @@ import cors from 'cors'
 import express, { Express, NextFunction, Request, Response } from 'express'
 import helmet from 'helmet'
 import { ZodError, z } from 'zod'
-import { makeCreateExerciseService } from './main/factories/makeCreateExerciseService'
+import { makeCreateExerciseService } from './main/factories/services/makeCreateExerciseService'
+import { makeListAllExercisesService } from './main/factories/services/makeListAllExercisesService'
 
 export class Server {
   public readonly app: Express
@@ -71,6 +72,12 @@ export class Server {
       const data = schema.parse(request.body)
       const result = await service.handle(data)
       return response.status(201).json(result)
+    })
+
+    this.app.get('/exercise', async (_, response) => {
+      const service = makeListAllExercisesService()
+      const result = await service.handle()
+      return response.status(200).json(result)
     })
   }
 }

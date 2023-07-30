@@ -16,6 +16,7 @@ describe('CreateExerciseService', () => {
   beforeAll(() => {
     exerciseRepository = {
       create: vi.fn().mockReturnValue('generated-id'),
+      listAll: vi.fn(),
     }
   })
 
