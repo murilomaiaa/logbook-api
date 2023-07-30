@@ -1,7 +1,6 @@
 import { ExerciseRepository } from '@/application/repositories/ExerciseRepository'
 import { CreateExerciseService } from './CreateExerciseService'
 import { Exercise } from '@/domain/entities/Exercise'
-import { ExerciseSet } from '@/domain/entities/ExerciseSet'
 
 describe('CreateExerciseService', () => {
   let systemUnderTests: CreateExerciseService
@@ -16,7 +15,7 @@ describe('CreateExerciseService', () => {
 
   beforeAll(() => {
     exerciseRepository = {
-      create: vi.fn(),
+      create: vi.fn().mockReturnValue('generated-id'),
     }
   })
 
@@ -34,18 +33,16 @@ describe('CreateExerciseService', () => {
       new Exercise(
         {
           name: handleArgs.name,
-          sets: handleArgs.sets.map(
-            (set) => new ExerciseSet(set, expect.any(String)),
-          ),
+          sets: handleArgs.sets,
         },
         expect.any(String),
       ),
     )
   })
 
-  it('should return exercise id', async () => {
+  it('should return the same id registered on database', async () => {
     const result = await systemUnderTests.handle(handleArgs)
 
-    expect(result).toEqual({ id: expect.any(String) })
+    expect(result).toEqual({ id: 'generated-id' })
   })
 })

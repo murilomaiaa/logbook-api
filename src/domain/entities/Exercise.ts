@@ -6,4 +6,12 @@ type ExerciseProps = {
   sets: ExerciseSet[]
 }
 
-export class Exercise extends Entity<ExerciseProps> {}
+export class Exercise extends Entity<ExerciseProps> {
+  get name() {
+    return this.props.name
+  }
+
+  get sets() {
+    return this.props.sets
+  }
+}

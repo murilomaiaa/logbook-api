@@ -1,8 +1,4 @@
-import { Entity } from './Entity'
-
-type ExerciseSetProps = {
+export type ExerciseSet = {
   numberOfReps: number
   weight: number
 }
-
-export class ExerciseSet extends Entity<ExerciseSetProps> {}
