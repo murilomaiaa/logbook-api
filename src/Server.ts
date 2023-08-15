@@ -14,26 +14,24 @@ export class Server {
     this.app = express()
     this.setupMiddlewares()
     this.setupRoutes()
-    this.app.use(
-      (error: Error, _: Request, response: Response, __: NextFunction) => {
-        if (error instanceof ZodError) {
-          console.log(error.issues)
-          const firstError = error.issues[0]
-          const field = firstError.path.join('.')
-          const message = firstError.message
+    this.app.use((error: Error, _: Request, response: Response, __: NextFunction) => {
+      if (error instanceof ZodError) {
+        console.log(error.issues)
+        const firstError = error.issues[0]
+        const field = firstError.path.join('.')
+        const message = firstError.message
 
-          return response.status(400).json({
-            status: 'error',
-            message: `${field}: ${message}`,
-          })
-        }
-
-        return response.status(500).json({
+        return response.status(400).json({
           status: 'error',
-          message: 'Internal server error',
+          message: `${field}: ${message}`,
         })
-      },
-    )
+      }
+
+      return response.status(500).json({
+        status: 'error',
+        message: 'Internal server error',
+      })
+    })
   }
 
   public setupMiddlewares() {

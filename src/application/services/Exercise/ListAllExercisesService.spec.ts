@@ -19,9 +19,7 @@ describe('ListAllExercisesService', () => {
 
   it('should return the same result repository returns', async () => {
     const repositoryResult = [makeFakeExercise()]
-    vi.spyOn(exerciseRepository, 'listAll').mockResolvedValueOnce(
-      repositoryResult,
-    )
+    vi.spyOn(exerciseRepository, 'listAll').mockResolvedValueOnce(repositoryResult)
     const result = await systemUnderTests.handle()
 
     expect(result).toEqual(repositoryResult)
